@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        dependent-repos: ["odoo-modules", "OpenElis"]
+        dependent-repos: ["odoo-modules", "OpenElis", "openmrs-distro-bahmni"]
     steps:
       - name: Create repository_dispatch
         env:
