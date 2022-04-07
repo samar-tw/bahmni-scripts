@@ -4,7 +4,7 @@ OPENELIS_SQL_FILE="clinlims_backup.sql"
 ODOO_SQL_FILE="odoo_backup.sql"
 OPENMRS_SQL_FILE="openmrs_backup.sql"
 BAHMNIPACS_SQL_FILE="bahmni_pacs_backup.sql"
-PACSDB_SQL_FILE="pacs_db_backup.sql"
+PACSDB_SQL_FILE="pacsdb_backup.sql"
 DEST_LOCATION="/home/vagrant/dbRestore"
 
 OPENMRS_DB_NAME="openmrs"
@@ -43,9 +43,9 @@ restore(){
 	psql -Uodoo -c "ALTER DATABASE $ODOO_DB_NAME OWNER TO odoo;"
 
 	ps aux | grep -ie $OPENELIS_DB_NAME | awk '{print $2}' | xargs kill -9
-	psql -Upostgres -c "drop database if exists $OPENELIS_DB_NAME;"
-	psql -Upostgres -c "create database $OPENELIS_DB_NAME;"
-	psql -Upostgres $OPENELIS_DB_NAME < $DEST_LOCATION/$ODOO_SQL_FILE
+	psql -Uclinlims -c "drop database if exists $OPENELIS_DB_NAME;"
+	psql -Uclinlims -c "create database $OPENELIS_DB_NAME;"
+	psql -Uclinlims $OPENELIS_DB_NAME < $DEST_LOCATION/$ODOO_SQL_FILE
 
 	ps aux | grep -ie $BAHMNIPACS_DB_NAME | awk '{print $2}' | xargs kill -9
 	psql -Upostgres -c  "drop database if exists $BAHMNIPACS_DB_NAME;"
