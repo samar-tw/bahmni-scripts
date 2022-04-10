@@ -1,4 +1,6 @@
-GITHUB_BASE_URL="https://github.com/Bahmni/bahmni-scripts/tree/BAH-1315/demo/db-backups/v0.93"
+#!/bin/sh
+
+GITHUB_BASE_URL="https://github.com/Bahmni/bahmni-scripts/raw/BAH-1315/demo/db-backups/v0.93"
 
 OPENELIS_SQL_FILE="clinlims_backup.sql"
 ODOO_SQL_FILE="odoo_backup.sql"
@@ -58,8 +60,8 @@ restore(){
 
   ps aux | grep -ie $BAHMNIPACS_DB_NAME | awk '{print $2}' | xargs kill -9
   psql -U$PSQLUSER -c  "drop database if exists $BAHMNIPACS_DB_NAME;"
-  psql -U$PSQLUSER -c  "create database $DEST_LOCATION/$BAHMNIPACS_DB_NAME;"
-  psql -U$PSQLUSER $BAHMNIPACS_DB_NAME < $BAHMNIPACS_SQL_FILE
+  psql -U$PSQLUSER -c  "create database $BAHMNIPACS_DB_NAME;"
+  psql -U$PSQLUSER $BAHMNIPACS_DB_NAME < $DEST_LOCATION/$BAHMNIPACS_SQL_FILE
 
   ps aux | grep -ie $PACS_DB_NAME | awk '{print $2}' | xargs kill -9
   psql -U$PSQLUSER -c  "drop database if exists $PACS_DB_NAME;"
