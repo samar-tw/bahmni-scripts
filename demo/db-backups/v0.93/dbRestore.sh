@@ -1,6 +1,11 @@
 #!/bin/sh
 
-GITHUB_BASE_URL="https://github.com/Bahmni/bahmni-scripts/raw/BAH-1315/demo/db-backups/v0.93"
+# This script will be called from a cron job on the server using the below command
+# 0 2 * * curl https://raw.githubusercontent.com/Bahmni/bahmni-scripts/master/demo/db-backups/v0.93/dbRestore.sh | sh  > /home/centos/dbRestoreLog.log
+
+. ~/.cronfile
+
+GITHUB_BASE_URL="https://github.com/Bahmni/bahmni-scripts/raw/master/demo/db-backups/v0.93"
 
 OPENELIS_SQL_FILE="clinlims_backup.sql"
 ODOO_SQL_FILE="odoo_backup.sql"
@@ -14,13 +19,6 @@ OPENELIS_DB_NAME="clinlims"
 ODOO_DB_NAME="odoo"
 BAHMNIPACS_DB_NAME="bahmni_pacs"
 PACS_DB_NAME="pacsdb"
-
-SQLUSER="root"
-PSQLUSER="postgres"
-PASSWORD="P@ssw0rd"
-PACSUSER="postgres"
-CLINLIMSUSER="clinlims"
-ODOOUSER="odoo"
 
 setup(){
  	rm -rf $DEST_LOCATION
